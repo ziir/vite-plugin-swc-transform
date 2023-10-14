@@ -5,6 +5,8 @@ Transform your TypeScript / JavaScript source files with [SWC](https://swc.rs) w
 - Sane defaults for [TypeScript's legacy / experimental decorators & metadata](https://www.typescriptlang.org/docs/handbook/decorators.html).
 - Full control over the rest of [SWC's configuration](https://swc.rs/docs/configuration).
 
+Read blog post of the story which led to the creation of this plugin: [TypeScript Legacy Experimental Decorators with Type Metadata in 2023](https://timtech.blog/posts/transform-typescript-legacy-decorators-vite-swc-plugin/).
+
 ## Installation
 
 ```sh

@@ -1,8 +1,8 @@
 {
   "name": "vite-plugin-swc-transform",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Vite plugin for transforming source files with SWC.",
-  "homepage": "https://github.com/ziir/vite-plugin-swc-transform",
+  "homepage": "https://timtech.blog/posts/transform-typescript-legacy-decorators-vite-swc-plugin/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ziir/vite-plugin-swc-transform.git"
@@ -16,6 +16,7 @@
   "keywords": [
     "vite",
     "plugin",
+    "vite-plugin",
     "swc",
     "transform",
     "typescript",
