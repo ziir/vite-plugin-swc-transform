@@ -1,0 +1,53 @@
+{
+  "name": "vite-plugin-swc-transform",
+  "version": "0.1.0",
+  "description": "Vite plugin for transforming source files with SWC.",
+  "homepage": "https://github.com/ziir/vite-plugin-swc-transform",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ziir/vite-plugin-swc-transform.git"
+  },
+  "author": {
+    "name": "Timothée “Tim” Pillard",
+    "email": "github@tpillard.fr",
+    "url": "https://twitter.com/tpillard"
+  },
+  "license": "MIT",
+  "keywords": [
+    "vite",
+    "plugin",
+    "swc",
+    "transform",
+    "typescript",
+    "decorator",
+    "metadata",
+    "reflect",
+    "nest",
+    "typedorm",
+    "dependency",
+    "injection"
+  ],
+  "type": "module",
+  "module": "index.js",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.js",
+      "require": null
+    }
+  },
+  "scripts": {},
+  "dependencies": {
+    "@rollup/pluginutils": "^5.0.5",
+    "@swc/core": "^1.3.92"
+  },
+  "peerDependencies": {
+    "vite": "^4"
+  },
+  "peerDependenciesMeta": {
+    "vite": {
+      "optional": true
+    }
+  }
+}
