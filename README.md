@@ -1,11 +1,11 @@
 # vite-plugin-swc-transform [![npm](https://img.shields.io/npm/v/vite-plugin-swc-transform)](https://www.npmjs.com/package/vite-plugin-swc-transform)
 
-Transform your TypeScript / JavaScript source files with [SWC](https://swc.rs) within your [Vite](vitejs.dev/) build process.
+Transform your TypeScript / JavaScript source files with [SWC](https://swc.rs) within your [Vite](vitejs.dev/) **build** process.
 
 - Sane defaults for [TypeScript's legacy / experimental decorators & metadata](https://www.typescriptlang.org/docs/handbook/decorators.html).
 - Full control over the rest of [SWC's configuration](https://swc.rs/docs/configuration).
 
-Read blog post of the story which led to the creation of this plugin: [TypeScript Legacy Experimental Decorators with Type Metadata in 2023](https://timtech.blog/posts/transform-typescript-legacy-decorators-vite-swc-plugin/).
+Read the blog post relating the story which led to the creation of this plugin: [TypeScript Legacy Experimental Decorators with Type Metadata in 2023](https://timtech.blog/posts/transform-typescript-legacy-decorators-vite-swc-plugin/).
 
 ## Installation
 
@@ -28,28 +28,23 @@ export default defineConfig({
 });
 ```
 
-_Note:_ the plugin will default to the following options:
+The plugin will default to the following options:
 
 ```js
 {
   include: /\.tsx?$/,
   exclude: /node_modules/,
+
   swcOptions: {
-    swcrc: false,
-    configFile: false,
-    inputSourceMap: false,
-    sourceMaps: true,
-    jsc: {
-      keepClassNames: false,
-      parser: {
-        decorators: false,
-        decoratorsBeforeExport: false,
-        exportDefaultFrom: false,
-        syntax: 'ecmascript'
-      },
-      transform: { legacyDecorator: false }
+    {
+      swcrc: false,
+      configFile: false,
+      inputSourceMap: false,
+      sourceMaps: true
     }
   },
+
+  suppressLegacyDecoratorNoExplicitUDFCFWarning: false
 }
 ```
 
@@ -70,6 +65,7 @@ export default defineConfig({
           transform: {
             legacyDecorator: true,
             decoratorMetadata: true,
+            useDefineForClassFields: false,
           },
           // externalHelpers: true,
         },
@@ -81,11 +77,11 @@ export default defineConfig({
 
 **Notes:**
 
-- should be used alongside `"compilerOptions.experimentalDecorators": false` & `"compilerOptions.emitDecoratorMetadata": false` in your `tsconfig.json`.
-- [`swcOptions.jsc.externalHelpers: true`](https://swc.rs/docs/configuration/compilation#jscexternalhelpers) is recommended when transforming TypeScript Legacy / Experimental Decorators with Metadata.
-- adding the `@swc/helpers` dependency is then necessary.
+- should be used alongside `"compilerOptions.experimentalDecorators": true` & `"compilerOptions.emitDecoratorMetadata": true` in your `tsconfig.json`.
+- [`swcOptions.jsc.externalHelpers: true`](https://swc.rs/docs/configuration/compilation#jscexternalhelpers) is recommended when transforming TypeScript Legacy / Experimental Decorators with Metadata to avoid helpers duplication & limit bundle size impact.
+  - adding the `@swc/helpers` dependency is then necessary.
 
-The above (without external helpers) will yield the following SWC transfrom options:
+The above (without external helpers) will yield the following SWC transform options:
 
 ```js
 {
@@ -95,12 +91,15 @@ The above (without external helpers) will yield the following SWC transfrom opti
   sourceMaps: true,
   jsc: {
     target: 'es2022',
-    transform: { legacyDecorator: true, decoratorMetadata: true },
+    transform: {
+      legacyDecorator: true,
+      decoratorMetadata: true,
+      useDefineForClassFields: false
+    },
     keepClassNames: true,
     parser: {
       decorators: true,
       decoratorsBeforeExport: true,
-      exportDefaultFrom: true,
       syntax: 'typescript'
     }
   }
@@ -109,5 +108,19 @@ The above (without external helpers) will yield the following SWC transfrom opti
 
 ### Notes
 
-- This plugin does not read, validate or infer from your `tsconfig.json` configuration.
+- This plugin does not read, validate or infer from the project's `tsconfig.json` configuration.
 - This plugin is intended to be used with an inlined `swcOptions` SWC configuration object.
+
+### 'useDefineForClassFields' warning
+
+```
+[vite-plugin-swc-transform] SWC option 'jsc.transform.legacyDecorator' enabled without an explicit 'jsc.transform.useDefineForClassFields' value.
+To remove this warning, either:
+ - unset or disable SWC option 'jsc.transform.legacyDecorator' if not needed
+ - set an explicit value for SWC option 'jsc.transform.useDefineForClassFields: boolean'
+ - pass vite-plugin-swc-transform option 'suppressLegacyDecoratorNoExplicitUDFCFWarning: true'
+```
+
+[Learn more](https://twitter.com/tpillard/status/1714545623813218388);
+
+Please open an issue if you think this is incorrect or should be improved.
