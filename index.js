@@ -6,12 +6,38 @@ const EMPTY_OBJECT = Object.freeze({});
 let _config;
 let _swcOptions = EMPTY_OBJECT;
 
-function transformFile(id, code, swcOptions) {
+function transformFile(
+  id,
+  code,
+  swcOptions,
+  suppressLegacyDecoratorNoExplicitUDFCFWarning
+) {
   const [filepath] = id.split("?", 1);
 
   if (_swcOptions === EMPTY_OBJECT) {
-    const jsc = swcOptions.jsc ?? EMPTY_OBJECT;
-    const legacyDecorator = !!jsc.transform?.legacyDecorator;
+    const jsc = swcOptions.jsc ?? null;
+    const legacyDecorator = jsc
+      ? jsc.transform?.legacyDecorator === true
+      : false;
+
+    if (legacyDecorator) {
+      const legacyDecoratorNoExplicitUDFCF = !(
+        "useDefineForClassFields" in jsc.transform
+      );
+
+      if (
+        legacyDecoratorNoExplicitUDFCF &&
+        !suppressLegacyDecoratorNoExplicitUDFCFWarning
+      ) {
+        console.warn(
+          "[vite-plugin-swc-transform] SWC option 'jsc.transform.legacyDecorator' enabled without an explicit 'jsc.transform.useDefineForClassFields' value.\n" +
+            "To remove this warning, either:\n" +
+            " - unset or disable SWC option 'jsc.transform.legacyDecorator' if not needed\n" +
+            " - set an explicit value for SWC option 'jsc.transform.useDefineForClassFields: boolean'\n" +
+            " - pass vite-plugin-swc-transform option 'suppressLegacyDecoratorNoExplicitUDFCFWarning: true'"
+        );
+      }
+    }
 
     _swcOptions = {
       swcrc: false,
@@ -19,23 +45,20 @@ function transformFile(id, code, swcOptions) {
       inputSourceMap: false,
       sourceMaps: true,
       ...swcOptions,
-      jsc: {
-        ...jsc,
-        keepClassNames: legacyDecorator,
-        parser: {
-          decorators: legacyDecorator,
-          decoratorsBeforeExport: legacyDecorator,
-          exportDefaultFrom: legacyDecorator,
-          ...jsc.parser,
-          syntax: legacyDecorator
-            ? "typescript"
-            : jsc.parser?.syntax || "ecmascript",
-        },
-        transform: {
-          ...jsc.transform,
-          legacyDecorator,
-        },
-      },
+      ...(jsc && {
+        jsc: legacyDecorator
+          ? {
+              ...jsc,
+              keepClassNames: true,
+              parser: {
+                decorators: true,
+                decoratorsBeforeExport: true,
+                syntax: "typescript",
+                ...jsc.parser,
+              },
+            }
+          : jsc,
+      }),
     };
   }
 
@@ -53,6 +76,7 @@ function transformFile(id, code, swcOptions) {
 export default function createViteSWCTransformPlugin({
   include,
   exclude,
+  suppressLegacyDecoratorNoExplicitUDFCFWarning = false,
   swcOptions,
 } = {}) {
   const filter = createFilter(include ?? /\.tsx?$/, exclude ?? /node_modules/);
@@ -69,7 +93,12 @@ export default function createViteSWCTransformPlugin({
     },
     transform(code, id) {
       if (!filter(id)) return null;
-      return transformFile(id, code, swcOptions ?? EMPTY_OBJECT);
+      return transformFile(
+        id,
+        code,
+        swcOptions ?? EMPTY_OBJECT,
+        suppressLegacyDecoratorNoExplicitUDFCFWarning
+      );
     },
   };
 }
