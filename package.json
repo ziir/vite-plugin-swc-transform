@@ -2,10 +2,13 @@
   "name": "vite-plugin-swc-transform",
   "version": "0.2.0",
   "description": "Vite plugin for transforming source files with SWC.",
-  "homepage": "https://timtech.blog/posts/transform-typescript-legacy-decorators-vite-swc-plugin/",
+  "homepage": "https://github.com/ziir/vite-plugin-swc-transform/#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ziir/vite-plugin-swc-transform.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ziir/vite-plugin-swc-transform/issues"
   },
   "author": {
     "name": "Timothée “Tim” Pillard",
@@ -28,26 +31,47 @@
     "dependency injection"
   ],
   "type": "module",
-  "module": "index.js",
+  "module": "./dist/index.js",
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "types": "./index.d.ts",
-      "import": "./index.js",
-      "require": null
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
     }
   },
-  "scripts": {},
+  "engines": {
+    "node": "^18.0.0 || >=20.0.0"
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "check": "biome check index.ts",
+    "check:fix": "npm run check -- --apply",
+    "prepare": "npm run build",
+    "test": "vitest",
+    "typecheck": "tsc --build --emitDeclarationOnly",
+    "validate": "npm check; npm test"
+  },
   "dependencies": {
     "@rollup/pluginutils": "^5.0.5",
     "@swc/core": "^1.3.92"
   },
   "peerDependencies": {
-    "vite": "^4"
+    "@types/node": "^18.0.0 || >=20.0.0",
+    "vite": "^5.0.12",
+    "vitest": "^1.2.1"
   },
   "peerDependenciesMeta": {
+    "@types/node": {
+      "optional": true
+    },
     "vite": {
       "optional": true
     }
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.5.2",
+    "@types/node": "^20.11.5",
+    "typescript": "^5.3.3",
+    "vite": "5.0.12"
   }
 }
