@@ -1,82 +1,77 @@
 {
-  "name": "vite-plugin-swc-transform",
-  "version": "0.3.1",
-  "description": "Vite plugin for transforming source files with SWC.",
-  "homepage": "https://github.com/ziir/vite-plugin-swc-transform/#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ziir/vite-plugin-swc-transform.git"
-  },
-  "bugs": {
-    "url": "https://github.com/ziir/vite-plugin-swc-transform/issues"
-  },
-  "author": {
-    "name": "Timothée “Tim” Pillard",
-    "email": "github@tpillard.fr",
-    "url": "https://twitter.com/tpillard"
-  },
-  "license": "MIT",
-  "keywords": [
-    "vite",
-    "plugin",
-    "vite-plugin",
-    "swc",
-    "transform",
-    "typescript",
-    "decorator",
-    "metadata",
-    "reflect",
-    "nest",
-    "typeorm",
-    "dependency injection"
-  ],
-  "type": "module",
-  "module": "./dist/index.js",
-  "files": ["dist", "README.md", "LICENSE"],
-  "exports": {
-    "./package.json": "./package.json",
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    }
-  },
-  "engines": {
-    "node": "^18.0.0 || >=20.0.0"
-  },
-  "scripts": {
-    "build": "tsc --build",
-    "check": "biome check src",
-    "check:fix": "npm run check -- --apply",
-    "prepare": "npm run validate && npm run build",
-    "test": "vitest",
-    "typecheck": "tsc --build --emitDeclarationOnly",
-    "validate": "npm run check && npm run typecheck && npm run test -- --run"
-  },
-  "dependencies": {
-    "@rollup/pluginutils": "^5.1.0",
-    "@swc/core": "^1.4.6"
-  },
-  "peerDependencies": {
-    "@types/node": "^18.0.0 || >=20.0.0",
-    "vite": "^5.0.12",
-    "vitest": "^1.2.1"
-  },
-  "peerDependenciesMeta": {
-    "@types/node": {
-      "optional": true
-    },
-    "vite": {
-      "optional": true
-    },
-    "vitest": {
-      "optional": true
-    }
-  },
-  "devDependencies": {
-    "@biomejs/biome": "^1.6.0",
-    "@types/node": "^20.11.25",
-    "typescript": "^5.4.2",
-    "vite": "^5.1.5",
-    "vitest": "^1.3.1"
-  }
+	"name": "vite-plugin-swc-transform",
+	"version": "0.4.0",
+	"description": "Vite plugin for transforming source files with SWC.",
+	"homepage": "https://github.com/ziir/vite-plugin-swc-transform/#readme",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ziir/vite-plugin-swc-transform.git"
+	},
+	"bugs": {
+		"url": "https://github.com/ziir/vite-plugin-swc-transform/issues"
+	},
+	"author": {
+		"name": "Timothée “Tim” Pillard",
+		"email": "github@tpillard.fr",
+		"url": "https://twitter.com/tpillard"
+	},
+	"license": "MIT",
+	"keywords": [
+		"vite",
+		"plugin",
+		"vite-plugin",
+		"swc",
+		"transform",
+		"typescript",
+		"decorator",
+		"metadata",
+		"reflect",
+		"nest",
+		"typeorm",
+		"dependency injection"
+	],
+	"type": "module",
+	"main": "./dist/esm/index.js",
+	"types": "./dist/types/index.d.ts",
+	"module": "./dist/esm/index.js",
+	"files": [
+		"dist"
+	],
+	"exports": {
+		"./package.json": "./package.json",
+		".": {
+			"types": "./dist/types/index.d.ts",
+			"default": "./dist/esm/index.js"
+		}
+	},
+	"engines": {
+		"node": "^18.0.0 || >=20.0.0"
+	},
+	"scripts": {
+		"build": "npm run build:src && npm run build:d.ts",
+		"build:src": "viteup",
+		"build:d.ts": "tsc --build",
+		"check": "biome check src",
+		"check:fix": "npm run check -- --apply",
+		"prepare": "npm run validate && npm run build && publint",
+		"test": "vitest -c vitest.config.ts --run",
+		"validate": "npm run check && npm t",
+		"prepublishOnly": "publint"
+	},
+	"dependencies": {
+		"@rollup/pluginutils": "^5.1.0",
+		"@swc/core": "^1.5.7"
+	},
+	"peerDependencies": {
+		"vite": "^5"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.7.3",
+		"@types/node": "~20.11.30",
+		"publint": "^0.2.8",
+		"typescript": "^5.4.5",
+		"vite": "^5.2.11",
+		"vitest": "^1.6.0",
+		"viteup": "^0.0.3-beta.1"
+	}
 }

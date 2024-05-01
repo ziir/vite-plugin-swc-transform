@@ -27,7 +27,7 @@ export function getTransformOptions({
 							syntax: "typescript",
 							...jsc.parser,
 						},
-				  }
+					}
 				: jsc,
 		}),
 	};

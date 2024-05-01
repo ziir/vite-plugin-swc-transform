@@ -1,8 +1,9 @@
 {
 	"extends": "../../tsconfig.base",
 	"compilerOptions": {
-		"rootDir": "..",
-		"emitDeclarationOnly": true
+		"rootDir": ".",
+		"declarationDir": ".tmp",
+		"tsBuildInfoFile": "tsconfig.__tests__.tsbuildinfo"
 	},
 	"include": ["**/*"],
 	"references": [{ "path": ".." }]

@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.base",
+  "compilerOptions": {
+    "rootDir": ".",
+    "declarationDir": ".tmp",
+    "tsBuildInfoFile": "tsconfig.root.tsbuildinfo"
+  },
+  "files": ["vite.config.ts", "vitest.config.ts"],
+  "references": [{ "path": "./src" }]
+}
