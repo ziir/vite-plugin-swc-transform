@@ -72,6 +72,6 @@
 		"typescript": "^5.4.5",
 		"vite": "^5.2.11",
 		"vitest": "^1.6.0",
-		"viteup": "^0.0.3-beta.1"
+		"viteup": "^0.0.3"
 	}
 }
