@@ -1,5 +1,9 @@
 {
   "files": [],
   "include": [],
-  "references": [{ "path": "./src" }, { "path": "./src/__tests__" }]
+  "references": [
+    { "path": "./tsconfig.root.json" },
+    { "path": "./src" },
+    { "path": "./src/__tests__" }
+  ]
 }
