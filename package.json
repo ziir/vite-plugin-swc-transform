@@ -1,6 +1,6 @@
 {
 	"name": "vite-plugin-swc-transform",
-	"version": "0.4.0",
+	"version": "0.5.0-beta.1",
 	"description": "Vite plugin for transforming source files with SWC.",
 	"homepage": "https://github.com/ziir/vite-plugin-swc-transform/#readme",
 	"repository": {
@@ -60,18 +60,18 @@
 	},
 	"dependencies": {
 		"@rollup/pluginutils": "^5.1.0",
-		"@swc/core": "^1.5.7"
+		"@swc/core": "^1.6.1"
 	},
 	"peerDependencies": {
 		"vite": "^5"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^1.7.3",
+		"@biomejs/biome": "^1.8.1",
 		"@types/node": "~20.11.30",
 		"publint": "^0.2.8",
 		"typescript": "^5.4.5",
-		"vite": "^5.2.11",
+		"vite": "^5.3.1",
 		"vitest": "^1.6.0",
-		"viteup": "^0.0.3"
+		"viteup": "^0.0.4-beta.1"
 	}
 }
