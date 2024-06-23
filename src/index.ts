@@ -55,6 +55,7 @@ export default function createViteSWCTransformPlugin({
 		config() {
 			return {
 				esbuild: false,
+				target: "esnext",
 			};
 		},
 		configResolved(resolvedConfig) {},
