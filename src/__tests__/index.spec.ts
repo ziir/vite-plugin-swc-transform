@@ -10,9 +10,13 @@ describe("createViteSWCTransformPlugin", () => {
 			enforce: "pre",
 		});
 
-		expect(createViteSWCTransformPlugin().config()).toStrictEqual({
+		const config = {};
+		createViteSWCTransformPlugin().config(config);
+		expect(config).toStrictEqual({
 			esbuild: false,
-			target: "esnext",
+			build: {
+				target: "esnext",
+			},
 		});
 
 		expect(createViteSWCTransformPlugin().transform).toBeTypeOf("function");

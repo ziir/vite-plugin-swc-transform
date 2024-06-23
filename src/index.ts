@@ -3,7 +3,7 @@ import {
 	createFilter,
 } from "@rollup/pluginutils";
 import { type Options as SWCOptions, transform } from "@swc/core";
-import type { Plugin } from "vite";
+import type { Plugin, UserConfig } from "vite";
 
 import { checkSwcOptionsOnce } from "./check-options-once.js";
 import { getTransformOptions } from "./get-transform-options.js";
@@ -52,11 +52,9 @@ export default function createViteSWCTransformPlugin({
 	return {
 		name: "swc-transform",
 		enforce: "pre",
-		config() {
-			return {
-				esbuild: false,
-				target: "esnext",
-			};
+		config(config: UserConfig) {
+			config.esbuild = false;
+			config.build = Object.assign(config.build || {}, { target: "esnext" });
 		},
 		configResolved(resolvedConfig) {},
 		transform(code, id) {
