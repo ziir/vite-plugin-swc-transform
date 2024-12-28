@@ -7,7 +7,10 @@ export function checkSwcOptionsOnce({
 }: {
 	swcOptions: SWCOptions;
 	suppressLegacyDecoratorNoExplicitUDFCFWarning: boolean;
-}) {
+}): {
+	jsc: JscConfig | null;
+	legacyDecorator: boolean;
+} {
 	const jsc = swcOptions.jsc ?? null;
 	const legacyDecorator = jsc ? jsc.transform?.legacyDecorator === true : false;
 

@@ -2,6 +2,7 @@
 	"extends": "../tsconfig.base",
 	"compilerOptions": {
 		"rootDir": ".",
+		"isolatedDeclarations": true,
 		"declarationDir": "../dist/types",
 		"tsBuildInfoFile": "tsconfig.src.tsbuildinfo"
 	},

@@ -16,14 +16,15 @@
 
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
+    "isolatedDeclarations": false,
 
     "allowSyntheticDefaultImports": false,
     "esModuleInterop": false,
     "forceConsistentCasingInFileNames": true,
 
     "strict": true,
-    "skipLibCheck": false,
+    "skipLibCheck": true,
 
-    "types": []
+    "types": ["node"]
   }
 }

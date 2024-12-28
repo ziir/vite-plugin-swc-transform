@@ -1,4 +1,5 @@
 import type { JscConfig } from "@swc/core";
+import type { SWCOptions } from "./index.js";
 import type { Params } from "./types.js";
 
 export function getTransformOptions({
@@ -9,7 +10,7 @@ export function getTransformOptions({
 	swcOptions: NonNullable<Params["swcOptions"]>;
 	jsc: JscConfig | null;
 	legacyDecorator: boolean;
-}) {
+}): SWCOptions {
 	return {
 		swcrc: false,
 		configFile: false,
@@ -23,7 +24,6 @@ export function getTransformOptions({
 						keepClassNames: true,
 						parser: {
 							decorators: true,
-							decoratorsBeforeExport: true,
 							syntax: "typescript",
 							...jsc.parser,
 						},

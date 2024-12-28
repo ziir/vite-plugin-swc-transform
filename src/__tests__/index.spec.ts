@@ -5,13 +5,21 @@ import { default as createViteSWCTransformPlugin } from "../index.js";
 
 describe("createViteSWCTransformPlugin", () => {
 	it("returns an object matching the Vite Plugin interface", () => {
-		expect(createViteSWCTransformPlugin()).toMatchObject({
+		const plugin = createViteSWCTransformPlugin();
+
+		expect(plugin).toMatchObject({
 			name: "swc-transform",
 			enforce: "pre",
 		});
 
 		const config = {};
-		createViteSWCTransformPlugin().config(config);
+
+		expect(plugin.config).toBeTypeOf("function");
+		if (typeof plugin.config !== "function") {
+			throw new Error("plugin.config() must be a function");
+		}
+
+		plugin.config(config, { command: "build", mode: "production" });
 		expect(config).toStrictEqual({
 			esbuild: false,
 			build: {
@@ -58,7 +66,6 @@ describe("getTransformOptions", () => {
 				loose: false,
 				parser: {
 					decorators: true,
-					decoratorsBeforeExport: true,
 					syntax: "typescript",
 				},
 			},

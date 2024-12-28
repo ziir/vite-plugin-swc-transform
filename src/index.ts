@@ -47,10 +47,10 @@ export default function createViteSWCTransformPlugin({
 	exclude,
 	suppressLegacyDecoratorNoExplicitUDFCFWarning = false,
 	swcOptions,
-}: Params = {}) {
+}: Params = {}): Plugin {
 	const filter = createFilter(include ?? /\.tsx?$/, exclude ?? /node_modules/);
 	return {
-		name: "swc-transform",
+		name: "swc-transform" as const,
 		enforce: "pre",
 		config(config: UserConfig) {
 			config.esbuild = false;
@@ -66,7 +66,7 @@ export default function createViteSWCTransformPlugin({
 				suppressLegacyDecoratorNoExplicitUDFCFWarning,
 			);
 		},
-	} satisfies Plugin;
+	};
 }
 
 export type { Params, RollupFilterPattern, SWCOptions };

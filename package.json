@@ -59,19 +59,19 @@
 		"prepublishOnly": "publint"
 	},
 	"dependencies": {
-		"@rollup/pluginutils": "^5.1.0",
-		"@swc/core": "^1.6.5"
+		"@rollup/pluginutils": "^5.1.4",
+		"@swc/core": "^1.10.3"
 	},
 	"peerDependencies": {
-		"vite": "^5"
+		"vite": "^6 || ^5"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^1.8.2",
-		"@types/node": "~20.11.30",
-		"publint": "^0.2.8",
-		"typescript": "^5.5.2",
-		"vite": "^5.3.1",
-		"vitest": "^1.6.0",
-		"viteup": "^0.0.4-beta.3"
+		"@biomejs/biome": "^1.9.4",
+		"@types/node": "~20.17.10",
+		"publint": "^0.2.12",
+		"typescript": "^5.7.2",
+		"vite": "^6.0.6",
+		"vitest": "^2.1.8",
+		"viteup": "^0.0.4"
 	}
 }
