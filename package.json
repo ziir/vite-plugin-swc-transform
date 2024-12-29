@@ -1,6 +1,6 @@
 {
 	"name": "vite-plugin-swc-transform",
-	"version": "1.1.0-alpha.1",
+	"version": "1.1.0-alpha.2",
 	"description": "Vite plugin for transforming source files with SWC.",
 	"homepage": "https://github.com/ziir/vite-plugin-swc-transform/#readme",
 	"repository": {
@@ -45,18 +45,18 @@
 		}
 	},
 	"engines": {
-		"node": "^18.0.0 || >=20.0.0"
+		"node": "^18.0.0 || ^20.0.0 || >=22.0.0"
 	},
 	"scripts": {
 		"build": "npm run build:src && npm run build:d.ts",
 		"build:src": "viteup",
 		"build:d.ts": "tsc --build",
 		"check": "biome check src",
-		"check:fix": "npm run check -- --apply",
+		"check:write": "npm run check -- --write",
 		"prepare": "npm run validate && npm run build && publint",
-		"test": "vitest -c vitest.config.ts --run",
-		"validate": "npm run check && npm t",
-		"prepublishOnly": "publint"
+		"test": "vitest -c vitest.config.ts",
+		"validate": "npm run check && npm t -- --run",
+		"prepublishOnly": "npm run prepare"
 	},
 	"dependencies": {
 		"@rollup/pluginutils": "^5.1.4",
@@ -67,11 +67,11 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
-		"@types/node": "~20.17.10",
+		"@types/node": "~22.10.2",
 		"publint": "^0.2.12",
 		"typescript": "^5.7.2",
 		"vite": "^6.0.6",
 		"vitest": "^2.1.8",
-		"viteup": "^0.0.4"
+		"viteup": "^0.0.5-alpha.2"
 	}
 }

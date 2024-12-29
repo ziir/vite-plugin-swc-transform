@@ -1,14 +1,16 @@
-import { defineConfig } from "vite";
-import swc from "./src/index";
+import { defineConfig, type UserConfig } from "vite";
+import swc from "./src/index.ts";
 
-export default defineConfig({
-	plugins: [
-		swc({
-			swcOptions: {
-				jsc: {
-					target: "es2022",
-				},
-			},
-		}),
-	],
+const config: UserConfig = defineConfig({
+  plugins: [
+    swc({
+      swcOptions: {
+        jsc: {
+          target: "es2022",
+        },
+      },
+    }),
+  ],
 });
+
+export default config;

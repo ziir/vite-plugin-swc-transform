@@ -1,6 +1,6 @@
 import type { UserConfig } from "vite";
 import { defineConfig, mergeConfig } from "vitest/config";
-import { getResolvedViteConfig } from 'viteup/pure';
+import { getResolvedViteConfig } from 'viteup/api';
 
 const config: UserConfig = mergeConfig(
 	getResolvedViteConfig(),

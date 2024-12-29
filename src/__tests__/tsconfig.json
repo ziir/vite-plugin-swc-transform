@@ -1,10 +1,10 @@
 {
-	"extends": "../../tsconfig.base",
-	"compilerOptions": {
-		"rootDir": ".",
-		"declarationDir": ".tmp",
-		"tsBuildInfoFile": "tsconfig.__tests__.tsbuildinfo"
-	},
-	"include": ["**/*"],
-	"references": [{ "path": ".." }]
+  "extends": "../../tsconfig.base",
+  "compilerOptions": {
+    "rootDir": ".",
+    "declarationDir": ".tmp",
+    "tsBuildInfoFile": "tsconfig.__tests__.tsbuildinfo"
+  },
+  "include": ["**/*"],
+  "references": [{ "path": ".." }]
 }

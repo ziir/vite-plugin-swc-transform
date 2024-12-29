@@ -16,11 +16,12 @@
 
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
-    "isolatedDeclarations": false,
+    "isolatedDeclarations": true,
 
     "allowSyntheticDefaultImports": false,
     "esModuleInterop": false,
     "forceConsistentCasingInFileNames": true,
+    "allowImportingTsExtensions": true,
 
     "strict": true,
     "skipLibCheck": true,
